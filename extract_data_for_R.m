@@ -25,6 +25,11 @@ fname = 'single_trials.csv';
 %--------------------------------------------------------------------------
 % Main data extraction
 %--------------------------------------------------------------------------
+
+% Load data if you need to
+%eeglab
+%EEG = pop_loadset('filename','kirby_25_processed.set');
+
 % This dataset is kinda weird because events are in multiple bins.
 % Bin information is stored in EEG.event.bini and we need to check if a
 % bin number is in bini rather than checking if bini == bin.

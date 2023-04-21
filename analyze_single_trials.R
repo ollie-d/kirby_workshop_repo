@@ -11,7 +11,7 @@
 library(tidyverse)
 
 # Let's load in our .csv
-dir <- 'C:/Users/H8801/Desktop/Kirby/'
+dir <- 'C:/Users/Ollie/kirby_workshop_repo/'
 fname <- 'single_trials.csv'
 df <- read.csv(paste(dir, fname, sep=""), header=TRUE, sep=",")
 
