@@ -1,0 +1,11 @@
+[ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
+EEG = pop_biosig('C:\Users\H8801\Desktop\Kirby\kirby_25.bdf', 'ref',[33 34] ,'importannot','off','refoptions',{'keepref','off'});
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 0,'setname','raw_step1','gui','off'); 
+EEG = pop_eegfiltnew(EEG, 'locutoff',0.1,'hicutoff',40,'chantype',{'EEG'});
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 1,'setname','filt_step2','gui','off'); 
+EEG  = pop_creabasiceventlist( EEG , 'AlphanumericCleaning', 'on', 'BoundaryNumeric', { -99 }, 'BoundaryString', { 'boundary' } ); % GUI: 20-Apr-2023 14:29:03
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 2,'setname','elist_step3','gui','off'); 
+EEG  = pop_binlister( EEG , 'BDF', 'C:\Users\H8801\Desktop\Kirby\KIRBY_sample_bin_descriptor_file.txt', 'IndexEL',  1, 'SendEL2', 'EEG', 'Voutput', 'EEG' ); % GUI: 20-Apr-2023 14:29:44
+[ALLEEG EEG] = eeg_store(ALLEEG, EEG, CURRENTSET);
+EEG = pop_epochbin( EEG , [-200.0  800.0],  'pre'); % GUI: 20-Apr-2023 14:31:55
+[ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG, EEG, 4,'setname','epoched_step5','gui','off'); 
