@@ -41,14 +41,16 @@ df_counter = 1; % to keep track of adding data.
 % Lets map channel labels to indices using a dictionary
 values = 1:EEG.nbchan;
 keys = {EEG.chanlocs.labels};
-chans = dictionary(keys, values);
+%chans = dictionary(keys, values); % requires MATLAB 2022a+
+chans = containers.Map(keys, values);
 
 % Let's make a nested loop that goes through bins, channels and epochs
 for bin = bins_of_interest
     % Extact all of the bini values for checking
-    binis = {EEG.event.bini}; % I hate MATLAB so much
+    binis = {EEG.event.bini};
     for chan = channels_of_interest
-        c = chans(chan); % get channel index
+        %c = chans(chan); % (if you use dict) get channel index
+        c = chans(chan{1}); % get channel index
 
         % Get epochs where bin is in bini
         for i = 1:size(binis, 2)
